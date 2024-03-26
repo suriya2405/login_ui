@@ -2,9 +2,26 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import COLORS from '../constants/colors';
+// import {axios} from 'axios';
 
 const Login = () => {
   const navigation = useNavigation();
+
+  // const [email, setEmail] = useState('');
+  //   const [password, setPassword] = useState('');
+
+    const handleLogin = async () => {
+        try {
+            const response = await axios.post('http://localhost:8000/login', {  // Replace with your backend URL
+                email,
+                password
+            });
+            Alert.alert('Success', response.data.message);
+            // Redirect to dashboard or perform other actions on successful login
+        } catch (error) {
+            Alert.alert('Error', 'Invalid email or password');
+        }
+    };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -18,17 +35,32 @@ const Login = () => {
           <TextInput
             style={styles.input}
             placeholder="Email"
+            // onChangeText={setEmail}
+            // value={email}
             placeholderTextColor={COLORS.grey}
             keyboardType="email-address"
           />
           <TextInput
             style={styles.input}
             placeholder="Password"
+            // onChangeText={setPassword}
+            // value={password}
             placeholderTextColor={COLORS.grey}
             secureTextEntry
           />
-          <TouchableOpacity style={styles.button} onPress={() => console.log('Login pressed')}>
-            <Text style={styles.buttonText}>Login</Text>
+          <TouchableOpacity style={styles.button} 
+            onPress={async () => {
+                console.log('Login pressed');
+                const loginSuccessful =true;
+                // const loginSuccessful = await handleLogin();
+                if (loginSuccessful) {
+                    navigation.navigate('Dashboard');
+                } else {
+                    // Handle error, display message, etc.
+                    console.log('Login failed');
+                }
+            }}>
+              <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
             <Text style={styles.signupText}>Don't have an account? Sign up</Text>

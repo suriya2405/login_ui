@@ -2,9 +2,33 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import COLORS from '../constants/colors';
+// import {axios} from 'axios';
 
 const Signup = () => {
   const navigation = useNavigation();
+
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+
+  const handleRegister = async () => {
+    try {
+        const response = await axios.post('http://localhost:8000/register', {
+            email,
+            password
+        });
+        if (response.data && response.data.user_id && response.data.email) {
+            // Registration successful
+            return true;
+        } else {
+            // Registration failed
+            return false;
+        }
+    } catch (error) {
+        // Handle error
+        console.error('Registration error:', error);
+        return false;
+    }
+};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -23,18 +47,35 @@ const Signup = () => {
           <TextInput
             style={styles.input}
             placeholder="Email"
+            // onChangeText={setEmail}
+            // value={email}
             placeholderTextColor={COLORS.grey}
             keyboardType="email-address"
           />
           <TextInput
             style={styles.input}
             placeholder="Password"
+            // onChangeText={setPassword}
+            // value={password}
             placeholderTextColor={COLORS.grey}
             secureTextEntry
           />
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.buttonText}>Create Account</Text>
-          </TouchableOpacity>
+          <TouchableOpacity 
+                style={styles.button} 
+                onPress={async () => {
+                    console.log('Create Account pressed');
+                    const registrationSuccessful= true;
+                    // const registrationSuccessful = await handleRegister();
+                    if (registrationSuccessful) {
+                        navigation.navigate('Login');
+                    } else {
+                        // Handle registration failure
+                        console.log('Registration failed');
+                    }
+                }}
+            >
+                <Text style={styles.buttonText}>Create Account</Text>
+            </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={styles.loginText}>Already have an account? Login</Text>
           </TouchableOpacity>

@@ -7,7 +7,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { FONTS } from './constants/fonts';
 import Login from './screens/Login'; // Assuming Login and Signup are also in the same directory
 import Signup from './screens/Signup';
-import Welcome from './screens/Welcome'; // Correct import path
+import Welcome from './screens/Welcome';
+import Dashboard from './screens/Dashboard'; // Correct import path
+import StockViewPage from './screens/StockViewPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +36,8 @@ export default function App() {
           <Stack.Screen name="Welcome" component={Welcome} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen name="StockViewPage" component={StockViewPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
