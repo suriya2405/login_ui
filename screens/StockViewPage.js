@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, FlatList } from 'react-native';
+import { View, StyleSheet, TextInput, FlatList ,TouchableOpacity,Text} from 'react-native';
 import StockItem from './StockItem';
+import { useNavigation } from '@react-navigation/native';
 
 const StockViewPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -27,6 +28,7 @@ const StockViewPage = () => {
     setFilteredData(newData);
   };
 
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <TextInput
@@ -42,7 +44,13 @@ const StockViewPage = () => {
           <StockItem companyName={item.name} percent={item.percent} trend={item.trend} />
         )}
       />
+
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('StockPricePrediction')}>
+        <Text style={styles.buttonText}>Make your prediction</Text>
+      </TouchableOpacity>
+
     </View>
+
   );
 };
 
@@ -58,6 +66,19 @@ const styles = StyleSheet.create({
     borderWidth:2,
     paddingHorizontal: 15,
     marginBottom: 20,
+  },
+
+  button: {
+    backgroundColor: '#31A062', // Green color
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 20,
+  },
+
+  buttonText: {
+    color: '#ffffff', // White color
+    fontSize: 16,
   },
 });
 

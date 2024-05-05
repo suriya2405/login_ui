@@ -54,7 +54,7 @@ const Login = () => {
                 const loginSuccessful =true;
                 // const loginSuccessful = await handleLogin();
                 if (loginSuccessful) {
-                    navigation.navigate('Dashboard');
+                  navigation.navigate('Dashboard');
                 } else {
                     // Handle error, display message, etc.
                     console.log('Login failed');

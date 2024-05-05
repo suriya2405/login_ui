@@ -10,6 +10,7 @@ import Signup from './screens/Signup';
 import Welcome from './screens/Welcome';
 import Dashboard from './screens/Dashboard'; // Correct import path
 import StockViewPage from './screens/StockViewPage';
+import StockPricePrediction from './screens/Stockpriceprediction';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,7 @@ export default function App() {
           <Stack.Screen name="Signup" component={Signup} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="StockViewPage" component={StockViewPage} />
+          <Stack.Screen name="StockPricePrediction" component={StockPricePrediction} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
